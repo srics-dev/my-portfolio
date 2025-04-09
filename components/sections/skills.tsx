@@ -17,7 +17,7 @@ const skills = [
   { name: "Git/GitHub", icon: <GitBranch className="w-8 h-8" />, color: "bg-rose-100 text-rose-500" },
   { name: "UI/UX Design", icon: <Figma className="w-8 h-8" />, color: "bg-indigo-100 text-indigo-500" },
   { name: "MongoDB", icon: <Database className="w-8 h-8" />, color: "bg-emerald-100 text-emerald-500" },
-  { name: "PostgreSQL", icon: <Database className="w-8 h-8" />, color: "bg-blue-100 text-blue-700" },
+  { name: "IoT", icon: <Cpu className="w-8 h-8" />, color: "bg-blue-100 text-blue-700" },
 ]
 
 export default function Skills() {

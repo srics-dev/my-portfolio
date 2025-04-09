@@ -8,10 +8,10 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   const socialLinks = [
-    { icon: <Github className="w-5 h-5" />, href: "https://github.com", label: "GitHub" },
+    { icon: <Github className="w-5 h-5" />, href: "https://github.com/srics-dev", label: "GitHub" },
     { icon: <Twitter className="w-5 h-5" />, href: "https://twitter.com", label: "Twitter" },
-    { icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com", label: "LinkedIn" },
-    { icon: <Instagram className="w-5 h-5" />, href: "https://instagram.com", label: "Instagram" },
+    { icon: <Linkedin className="w-5 h-5" />, href: "www.linkedin.com/in/shrikanth-m-8925131b4", label: "LinkedIn" },
+    { icon: <Instagram className="w-5 h-5" />, href: "https://www.instagram.com/srics-dev", label: "Instagram" },
   ]
 
   return (
@@ -20,10 +20,10 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
             <Link href="#home" className="text-2xl font-bold">
-              Portfolio
+              SRICS-DEV
             </Link>
             <p className="mt-2 text-gray-400 max-w-md">
-              Building modern web experiences with cutting-edge technologies.
+              Building using modern technology experiences with cutting-edge technologies.
             </p>
           </div>
 
@@ -45,7 +45,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 flex items-center">© {currentYear} John Doe. All rights reserved.</p>
+          <p className="text-gray-400 flex items-center">© {currentYear} Srics-Dev. All rights reserved.</p>
 
           <div className="mt-4 md:mt-0">
             <ul className="flex flex-wrap justify-center space-x-6">

@@ -1,9 +1,11 @@
+{/*
 "use client"
 
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 import { Briefcase, Calendar } from "lucide-react"
+
 
 const experiences = [
   {
@@ -28,6 +30,7 @@ const experiences = [
       "Assisted in the development of web applications. Gained experience in frontend technologies and agile development methodologies.",
   },
 ]
+
 
 export default function Experience() {
   const ref = useRef(null)
@@ -99,4 +102,4 @@ export default function Experience() {
     </section>
   )
 }
-
+*/}

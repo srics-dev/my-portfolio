@@ -1,72 +1,103 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef, useState } from "react"
-import { Send, Mail, Phone, MapPin, CheckCircle } from "lucide-react"
-import FormInput from "@/components/ui/form-input"
-import { validateContactForm } from "@/lib/validation"
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { Send, Mail, Phone, MapPin, CheckCircle } from "lucide-react";
+import FormInput from "@/components/ui/form-input";
+import { validateContactForm } from "@/lib/validation";
 
 export default function Contact() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [formState, setFormState] = useState({
     name: "",
     email: "",
     message: "",
-  })
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({})
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitSuccess, setSubmitSuccess] = useState(false)
-  const [submitError, setSubmitError] = useState("")
+  });
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
     setFormState({
       ...formState,
       [name]: value,
-    })
+    });
 
     // Clear error when user starts typing
     if (formErrors[name]) {
       setFormErrors({
         ...formErrors,
         [name]: "",
-      })
+      });
     }
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitError("")
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError("");
 
     // Validate form
-    const validation = validateContactForm(formState)
+    const validation = validateContactForm(formState);
     if (!validation.isValid) {
-      setFormErrors(validation.errors)
-      setIsSubmitting(false)
-      return
+      setFormErrors(validation.errors);
+      setIsSubmitting(false);
+      return;
     }
 
     // Simulate form submission
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      setSubmitSuccess(true)
-      setFormState({ name: "", email: "", message: "" })
+    // try {
+    //   await new Promise((resolve) => setTimeout(resolve, 1500));
+    //   setSubmitSuccess(true);
+    //   setFormState({ name: "", email: "", message: "" });
 
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setSubmitSuccess(false)
-      }, 5000)
-    } catch (error) {
-      setSubmitError("There was an error submitting the form. Please try again.")
+    //   // Reset success message after 5 seconds
+    //   setTimeout(() => {
+    //     setSubmitSuccess(false);
+    //   }, 5000);
+    // } catch (error) {
+    //   setSubmitError("There was an error submitting the form. Please try again.");
+    // } finally {
+    //   setIsSubmitting(false);
+    // }
+
+    // **Formspree Integration**
+    try {
+      const res = await fetch("https://formspree.io/f/xpzvpvae", { // Replace with your Formspree form ID
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+        }),
+      });
+
+      if (res.ok) {
+        setSubmitSuccess(true);
+        setFormState({ name: "", email: "", message: "" });
+        setTimeout(() => setSubmitSuccess(false), 5000);
+      } else {
+        throw new Error("Failed to send message.");
+      }
+    } catch (error:unknown) { // Use 'any' or a more specific error type if you know it
+      setSubmitError("There was an error submitting the form. Please try again.");
+      console.error("Form submission error:", error); // Log the error for debugging
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -76,7 +107,7 @@ export default function Contact() {
         staggerChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -87,17 +118,19 @@ export default function Contact() {
         duration: 0.5,
       },
     },
-  }
+  };
 
   return (
     <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">Get In Touch</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+            Get In Touch
+          </h2>
           <div className="w-20 h-1 bg-rose-500 mx-auto mb-10"></div>
           <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? Feel free to reach out to me using the form below or through
-            my contact information.
+            Have a project in mind or want to collaborate? Feel free to reach out
+            to me using the form below or through my contact information.
           </p>
         </div>
 
@@ -110,19 +143,23 @@ export default function Contact() {
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
             >
-              <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Contact Information</h3>
+              <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">
+                Contact Information
+              </h3>
 
               <motion.div className="flex items-start mb-6" variants={itemVariants}>
                 <div className="bg-rose-100 dark:bg-rose-900/30 p-3 rounded-full mr-4">
                   <Mail className="w-5 h-5 text-rose-500" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 dark:text-white">Email</h4>
+                  <h4 className="font-medium text-gray-900 dark:text-white">
+                    Email
+                  </h4>
                   <a
-                    href="mailto:hello@example.com"
+                    href="mshrikanth315@gmail.com"
                     className="text-gray-600 dark:text-gray-300 hover:text-rose-500 dark:hover:text-rose-400 transition-colors"
                   >
-                    hello@example.com
+                    mshrikanth315@gmail.com
                   </a>
                 </div>
               </motion.div>
@@ -132,12 +169,14 @@ export default function Contact() {
                   <Phone className="w-5 h-5 text-rose-500" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 dark:text-white">Phone</h4>
+                  <h4 className="font-medium text-gray-900 dark:text-white">
+                    Phone
+                  </h4>
                   <a
-                    href="tel:+1234567890"
+                    href="tel:+919019675683"
                     className="text-gray-600 dark:text-gray-300 hover:text-rose-500 dark:hover:text-rose-400 transition-colors"
                   >
-                    +1 (234) 567-890
+                    +919019675683
                   </a>
                 </div>
               </motion.div>
@@ -147,8 +186,12 @@ export default function Contact() {
                   <MapPin className="w-5 h-5 text-rose-500" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 dark:text-white">Location</h4>
-                  <p className="text-gray-600 dark:text-gray-300">San Francisco, CA</p>
+                  <h4 className="font-medium text-gray-900 dark:text-white">
+                    Location
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Karnataka, India
+                  </p>
                 </div>
               </motion.div>
             </motion.div>
@@ -159,7 +202,10 @@ export default function Contact() {
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
+              <form
+                onSubmit={handleSubmit}
+                className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6"
+              >
                 {submitSuccess && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
@@ -236,6 +282,5 @@ export default function Contact() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

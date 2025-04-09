@@ -35,8 +35,8 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            <span className="block">John Doe</span>
-            <span className="text-rose-500">Web Developer</span>
+            <span className="block">Shrikanth</span>
+            <span className="text-rose-500"></span>
           </motion.h1>
           <motion.p
             className="text-gray-600 dark:text-gray-300 text-lg mb-8 max-w-md"
@@ -44,7 +44,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            I build modern, responsive web applications with cutting-edge technologies.
+            “I’m a passionate web developer with a strong foundation in front-end technologies and UI/UX principles. As a fresher, I bring hands-on experience from real-world projects, not just theory—building modern, responsive, and user-friendly applications that blend design with functionality.”.
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
@@ -90,7 +90,7 @@ export default function Hero() {
             whileHover={{ scale: 1.05, rotate: 5 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
           >
-            <Image src="/placeholder.svg?height=320&width=320" alt="Profile" fill className="object-cover" priority />
+            <Image src="/1651891690098.jpeg?height=320&width=320" alt="Profile" fill className="object-cover" priority />
           </motion.div>
         </motion.div>
       </div>

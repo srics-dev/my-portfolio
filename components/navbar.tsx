@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
-import ThemeToggle from "./theme-toggle"
 import { useScrollSpy } from "@/hooks/use-scroll-spy"
 
 const navItems = [
@@ -46,24 +45,20 @@ export default function Navbar() {
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white dark:bg-gray-900 shadow-md py-2" : "bg-transparent py-4"
+        isScrolled ? "bg-background shadow-md py-2" : "bg-transparent py-4"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6 bg-neutral-950 rounded-2xl p-3">
         <div className="flex items-center justify-between">
-          <Link
-            href="#home"
-            className="text-xl font-bold text-gray-900 dark:text-white"
-            onClick={() => scrollToSection("#home")}
-          >
-            Portfolio
+          <Link href="#home" className="text-xl font-bold text-red-500" onClick={() => scrollToSection("#home")}>
+            SRICS-DEV
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-6">
+          <nav className="hidden md:flex space-x-6 text-cyan-600">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -71,7 +66,7 @@ export default function Navbar() {
                 className={`relative px-2 py-1 transition-colors ${
                   activeSection === item.href.replace("#", "")
                     ? "text-rose-500"
-                    : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
                 onClick={(e) => {
                   e.preventDefault()
@@ -90,40 +85,34 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="flex items-center space-x-4">
-            <ThemeToggle />
-
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none"
-              onClick={toggleMenu}
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-muted-foreground hover:text-foreground focus:outline-none"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
         <motion.div
-          className="md:hidden bg-white dark:bg-gray-800"
+          className="md:hidden bg-background"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="container mx-auto px-4 py-4">
-            <nav className="flex flex-col space-y-4">
+          <div className="container mx-auto px-4 py-4 bg-black rounded-3xl">
+            <nav className="flex flex-col space-y-4 text-cyan-600">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
                   className={`py-2 ${
-                    activeSection === item.href.replace("#", "")
-                      ? "text-rose-500 font-medium"
-                      : "text-gray-600 dark:text-gray-300"
+                    activeSection === item.href.replace("#", "") ? "text-rose-500 font-medium" : "text-muted-foreground"
                   }`}
                   onClick={(e) => {
                     e.preventDefault()
@@ -140,4 +129,3 @@ export default function Navbar() {
     </motion.header>
   )
 }
-
