@@ -50,7 +50,7 @@ export default function Testimonials() {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Client Testimonials</h2>
           <div className="w-20 h-1 bg-rose-500 mx-auto mb-10"></div>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Here's what some of my clients have to say about working with me.
+            Here is what some of my clients have to say about working with me.
           </p>
         </div>
 
@@ -76,7 +76,7 @@ export default function Testimonials() {
                 className="mb-8"
               >
                 <p className="text-gray-700 text-lg italic mb-6 leading-relaxed">
-                  "{testimonials[currentIndex].content}"
+                  {testimonials[currentIndex].content}
                 </p>
 
                 <div className="flex items-center">

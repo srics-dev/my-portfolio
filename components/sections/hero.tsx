@@ -27,7 +27,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            Hello, I'm
+            Hello, I am
           </motion.span>
           <motion.h1
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4"

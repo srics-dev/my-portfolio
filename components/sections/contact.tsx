@@ -213,7 +213,7 @@ export default function Contact() {
                     className="mb-6 p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg flex items-center"
                   >
                     <CheckCircle className="w-5 h-5 mr-2" />
-                    Thank you for your message! I'll get back to you soon.
+                    Thank you for your message! I will get back to you soon.
                   </motion.div>
                 )}
 
